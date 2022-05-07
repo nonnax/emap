@@ -1,56 +1,84 @@
 #!/usr/bin/env bash
 # Id$ nonnax 2022-03-21 21:31:49 +0800
 require 'erb'
-class EMap
+
+class Router
   @map={}
+  class << self
+    attr :map
+    def erb(url, v, **opts)
+      @map[url]=[v, opts]
+    end
 
-  attr :data
-
-  def self.erb(url, v, **opts)
-    @map[url]=[v, opts]
+    def define(&block)
+      instance_eval(&block)
+    end
   end
+end
+
+class View
+  class << self
+    attr :data
+
+    def path(f, default: '')
+      xpath=File.expand_path("public/#{f}.erb", Dir.pwd)
+      File.read(xpath) rescue default
+    end
+
+    def erb(name, **opts)
+      @data = opts
+      layout=opts[:layout]
+      layout=path(layout, default:'<%=yield%>')
+      name = path(name, default: name.to_s)
+      render(layout){
+        render(name, binding)
+      }
+    end
+
+    def render(name, b=binding)
+      ERB.new(name).result(b)
+    end
+  end
+end
+
+class EMap
+  class Response<Rack::Response; end
+  attr :data, :req, :res
 
   def self.define(&block)
-    instance_eval(&block)
+    Router.define(&block)
   end
 
-  def self.map
-    @map
-  end
-
-  def path(f, default: '')
-    xpath=File.expand_path("public/#{f}.erb", Dir.pwd)
-    File.read(xpath) rescue default
+  def routes
+    Router::map
   end
 
   def erb(name, **opts)
-    @data = opts
-    layout=opts[:layout]
-    layout=path(layout, default:'<%=yield%>')
-    name = path(name, default: name.to_s)
-    render(layout){
-      render(name, binding)
-    }
+    View::erb(name, **opts)
   end
 
-  def render(name, b=binding)
-    ERB.new(name).result(b)
+  def self.get(&block)
+     new.tap{|o| o.get(&block)}
+  end
+
+  def get(&block)
+     @get=block
   end
 
   def default
-    not_found = self.class::map['/404']
+    not_found = routes['/404']
     status, body = 404, erb( (not_found&.first || 'Not Found'))
     [status, body]
   end
 
   def call env
-    route = self.class::map[env['PATH_INFO']]
-    request_method = env['REQUEST_METHOD']
+    @req = Rack::Request.new(env)
+    route = routes[env['PATH_INFO']]
     v, opts = route
     if route
-      status = 200
-      body = path(v, default: v)
-      body = erb(body, **opts)
+      status, body = 200, View::path(v, default: v)
+      # body = erb(body, **opts.merge(req.params).transform_keys(&:to_sym))
+      body = instance_exec(body, **opts.merge(req.params).transform_keys(&:to_sym), &@get)
     else
       status, body = default
     end

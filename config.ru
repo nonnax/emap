@@ -15,6 +15,5 @@ EMap.define do
   erb '/404',  'not found handler', layout: :'views/layout'
 end
 
-pp EMap.map
+pp Router.map
 
-run EMap.new

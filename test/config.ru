@@ -6,6 +6,5 @@ use Rack::Static,
   :urls => ["/images", "/js", "/css"],
   :root => "public"
 
-pp EMap.map
 
-run EMap.new
+run App
