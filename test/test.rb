@@ -22,7 +22,12 @@ class TestApp < Test::Unit::TestCase
 
   def test_root_post
     post '/home'
-    assert_equal last_response.status, 404
+    assert_equal last_response.status, 200
+  end
+
+  def test_root_put
+    put '/home'
+    assert_equal last_response.status, 200
   end
 
   def test_not_found

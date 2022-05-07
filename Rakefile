@@ -9,5 +9,7 @@ end
 
 desc 'minitest'
 task :test do
-  sh 'ruby test.rb'
+  Dir.chdir 'test' do
+    sh 'ruby test.rb'
+  end
 end

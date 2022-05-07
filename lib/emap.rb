@@ -4,6 +4,8 @@ require 'erb'
 class EMap
   @map={}
 
+  attr :data
+
   def self.erb(url, v, **opts)
     @map[url]=[v, opts]
   end
@@ -22,20 +24,22 @@ class EMap
   end
 
   def erb(name, **opts)
+    @data = opts
     layout=opts[:layout]
     layout=path(layout, default:'<%=yield%>')
-    render(layout, **opts){
-      render(name, binding, **opts)
+    name = path(name, default: name.to_s)
+    render(layout){
+      render(name, binding)
     }
   end
 
-  def render(name, b=binding, **opts)
+  def render(name, b=binding)
     ERB.new(name).result(b)
   end
 
   def default
     not_found = self.class::map['/404']
-    status, body = 404, erb( (not_found&.first || 'Not Found'), layout: :'/views/layout')
+    status, body = 404, erb( (not_found&.first || 'Not Found'))
     [status, body]
   end
 
@@ -43,10 +47,10 @@ class EMap
     route = self.class::map[env['PATH_INFO']]
     request_method = env['REQUEST_METHOD']
     v, opts = route
-    if route && request_method=='GET'
+    if route
       status = 200
       body = path(v, default: v)
-      body = erb( body, **opts)
+      body = erb(body, **opts)
     else
       status, body = default
     end

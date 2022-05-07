@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Id$ nonnax 2022-03-21 21:31:49 +0800
-require_relative 'emap'
+require_relative 'lib/emap'
 
 use Rack::Static,
   :urls => ["/images", "/js", "/css"],
