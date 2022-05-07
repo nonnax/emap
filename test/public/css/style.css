@@ -41,7 +41,7 @@ a {
   min-height: 1vh;
   justify-content: center;
   padding-top: 0;
-  background: linear-gradient(to bottom, Black, grey);
+  background: linear-gradient(to bottom, grey, Black);
 }
 
 #header .navbar {
@@ -95,7 +95,7 @@ a {
   flex: 0 0 95.5vw;
   flex-flow: no-wrap;
   width: 95.5vw;
-  padding: inherit;
+  padding: 3rem;
   margin: 2rem;
 }
 

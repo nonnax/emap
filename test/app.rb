@@ -3,7 +3,17 @@
 require 'emap'
 require_relative 'lib/model'
 
-database=DB::load
+database = DB::load
+backup = database
+
+Thread.new do
+  loop do
+    database = DB::load rescue backup
+    backup = database
+    sleep 300
+    puts 'updated'
+  end
+end
 
 Router.define do
 

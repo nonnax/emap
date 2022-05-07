@@ -1,5 +1,5 @@
 <% params[:db].each_with_index do |h, i|
-  div_class = i.zero? ? 'item1' : 'item' %>
+  div_class = (i % 5).zero? ? 'item1' : 'item' %>
 
   <div class='<%= div_class %>' >
     <a href='/show?item=<%=i%>'>
