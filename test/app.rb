@@ -8,7 +8,7 @@ EMap.define do
       :index,
       layout: :'views/layout', time: Time.now
 
-  erb '/home', '<h1>hello</h1>'
+  erb '/home', :'<h1>hello</h1>'
 
   erb '/404',
       'not found handler',
