@@ -21,12 +21,12 @@ class TestApp < Test::Unit::TestCase
   end
 
   def test_root_post
-    post '/home'
+    post '/show'
     assert_equal last_response.status, 200
   end
 
   def test_root_put
-    put '/home'
+    put '/show'
     assert_equal last_response.status, 200
   end
 

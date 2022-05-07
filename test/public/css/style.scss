@@ -1,4 +1,6 @@
 /* GLOBAL STYLES */
+$maxwidth : 96vw;
+
 * {
   box-sizing: border-box;
 }
@@ -31,7 +33,7 @@ a {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 95vw;
+  width: ($maxwidth - 1vw);
   padding: 1rem;
 }
 
@@ -42,74 +44,76 @@ a {
   justify-content: center;
   padding-top: 0;
   background: linear-gradient(to bottom, Black, grey);
-}
 
-#header .navbar {
-  flex: 1 0 95vw;
-  width: 96vw;
-  margin: 1em;
-  padding: 1em;
-  padding-top: 0;
-  flex-wrap: wrap;
-  height: 1vh;
-}
+  .navbar {
+    flex: 1 0 95vw;
+    width: 96vw;
+    margin: 1em;
+    padding: 1em;
+    padding-top: 0;
+    flex-wrap: wrap;
+    height: 1vh;
 
-#header .navbar .item {
-  flex: 5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  text-align: center;
-  background: red;
-  color: white;
-  z-index: 99;
+    .item {
+      flex: 5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      text-align: center;
+      background: red;
+      color: white;
+      z-index: 99;
+     }
+   }
 }
 
 #container {
   background: linear-gradient(to bottom, Black, grey);
   min-height: 60vh;
-}
 
-#container .item {
-  flex: 15rem;
-  width: 15rem;
-  margin: 1em;
-  padding: 1em;
-  justify-content: center;
-}
+  .item {
+    flex: 15rem;
+    width: 15rem;
+    margin: 1em;
+    padding: 1em;
+    justify-content: center;
+  }
 
-#container .item p {
-  color: inherit;
-}
+  .item p {
+    color: inherit;
+  }
 
-#container item img {
-  flex: 0 0 200px;
-  height: 200px;
-  /* width: auto; */
-}
+  item img {
+    flex: 0 0 200px;
+    height: 200px;
+    /* width: auto; */
+  }
 
-#container .item:hover {
-  -moz-transn: scale(1.002);
-}
+  .item:hover {
+    -moz-transn: scale(1.002);
+  }
 
-#container .item1 {
-  flex: 0 0 95.5vw;
-  flex-flow: no-wrap;
-  width: 95.5vw;
-  padding: inherit;
-  margin: 2rem;
+ .item1 {
+    flex: 0 0 ($maxwidth - 0.5vw);
+    flex-flow: no-wrap;
+    width: ($maxwidth - 0.5vw);
+    padding: inherit;
+    margin: 2rem;
+  }
 }
 
 .blur {
   filter: blur(6px);
 }
 
-.item img,
-.item1 img {
-  display: block;
-  float: left;
-  width: 8rem;
-  height: auto;
-  margin: 5px;
+.item,
+.item1 {
+  img {
+    display: block;
+    float: left;
+    width: 8rem;
+    height: auto;
+    margin: 5px;
+  }
 }
 
 #container .item img {

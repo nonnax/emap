@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # Id$ nonnax 2022-05-07 13:09:18 +0800
-require_relative '../lib/emap'
+require 'emap'
 require_relative 'lib/model'
 
 database=DB::load
