@@ -15,6 +15,10 @@ Router.define do
       item:1,
       layout: :'views/layout'
 
+  erb '/about',
+      'under construction',
+      layout: :'views/layout'
+
   erb '/404',
       'not found handler',
       layout: :'views/layout'

@@ -1,0 +1,11 @@
+date: 20220501
+tag: ffmpeg
+---
+Adding audio
+# If you want to add audio (e.g. audio.wav) to one poster image, you need -shortest to tell it to stop after the audio stream is finished.
+# The internal AAC encoder is used in this example, but you can use any other supported AAC encoder as well:
+ffmpeg -loop 1 -i img.jpg -i audio.wav -c:v libx264 -c:a aac -b:a 192k -shortest out.mp4
+
+# If your audio file is using a codec that the output container supports (e.g. MP3 audio in AVI or M4A/AAC audio in MP4),
+# you can stream copy (re-mux) it instead of re-encoding, which will preserve the audio quality:
+ffmpeg -loop 1 -i img.jpg -i audio.m4a -c:v libx264 -c:a copy -shortest out.mp4
