@@ -1,2 +1,13 @@
-<h1><%= data %></h1>
-<a href="/home?item=1">item a</a>
+<% params[:db].each_with_index do |h, i|
+  div_class = i.zero? ? 'item1' : 'item' %>
+
+  <div class='<%= div_class %>' >
+    <a href='/show?item=<%=i%>'>
+      <%= h[:tag] %>
+    </a>
+    <p>
+      <%= h[:body].join.strip %>
+    </p>
+  </div>
+
+<% end %>

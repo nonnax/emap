@@ -18,7 +18,7 @@ end
 
 class View
   class << self
-    attr :data
+    attr :data, :params
 
     def path(f, default: '')
       xpath=File.expand_path("public/#{f}.erb", Dir.pwd)
@@ -26,7 +26,7 @@ class View
     end
 
     def erb(name, **opts)
-      @data = opts
+      @params = @data = opts.dup
       layout=opts[:layout]
       layout=path(layout, default:'<%=yield%>')
       name = path(name, default: name.to_s)

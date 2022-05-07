@@ -1,3 +1,4 @@
-#!/usr/bin/env ruby
-<h1>Item</h1>
-<a href="/?item=1">1</a>
+<div class="item1">
+  <% i = params[:item].to_i %>
+  <%= params[:db][i][:body].join %>
+</div>

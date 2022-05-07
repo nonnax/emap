@@ -1,0 +1,141 @@
+/* GLOBAL STYLES */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito';
+  margin: auto;
+  margin-left: 1rem;
+  padding: 0;
+  background: black;
+  color: white;
+  justify-content: center;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: Oswald, sans-serif;
+  font-weight: normal;
+  color: silver;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+a {
+  text-decoration: none;
+  color: orange;
+}
+
+#header,
+#container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 95vw;
+}
+
+#header {
+  flex-wrap: wrap;
+  width: 95vw;
+  min-height: 4vw;
+  justify-content: center;
+  padding-top: 0;
+}
+
+#header .navbar {
+  flex: 0 0 95vw;
+  width: 96vw;
+  margin: 1em;
+  padding: 1em;
+  padding-top: 0;
+  flex-wrap: wrap;
+  height: 4vw;
+}
+
+#header .navbar .item {
+  flex: 5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
+  background: red;
+  color: white;
+}
+
+#container {
+  background: linear-gradient(to bottom, Black, grey);
+}
+
+#container .item {
+  flex: 15rem;
+  width: 15rem;
+  margin: 1em;
+  padding: 1em;
+  justify-content: center;
+}
+
+#container .item p {
+  color: inherit;
+}
+
+#container .item img {
+  flex: 0 0 200px;
+  height: 200px;
+  /* width: auto; */
+}
+
+#container .item:hover {
+  -moz-transn: scale(1.002);
+}
+
+#container .item1 {
+  flex: 0 0 calc($maxwidth-1rem);
+  flex-flow: no-wrap;
+  width: calc($maxwidth-1rem);
+  padding: inherit;
+  margin: 2rem;
+}
+
+.blur {
+  filter: blur(6px);
+}
+
+#container .item img, #container .item1 img {
+  display: block;
+  float: left;
+  width: 8rem;
+  height: auto;
+  margin: 5px;
+}
+
+#container .item img {
+  filter: blur(1px);
+}
+
+/* Responsive layout - makes a one column layout (100%) instead of a two-column layout (50%) */
+@media only screen and (min-width: 320px) {
+  #container {
+    justify-content: space-around;
+  }
+  #navbar {
+    width: 98%;
+    flex: 0 0 98%;
+    flex-flow: column no-wrap;
+    top: calc(100vh - 6vh);
+  }
+  .item,
+.navitem {
+    flex: 100%;
+    flex-flow: column no-wrap;
+  }
+  a {
+    font-size: 1.2rem;
+  }
+  h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+}

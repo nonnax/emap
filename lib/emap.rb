@@ -37,15 +37,11 @@ class EMap
     v, opts = route
     if route
       status, body = 200, View::path(v, default: v)
-      # body = erb(body, **opts.merge(req.params).transform_keys(&:to_sym))
       body = instance_exec(body, **opts.merge(req.params).transform_keys(&:to_sym), &@get)
     else
       status, body = default
     end
-    [status, {'Content-Type'  => 'text/html; charset=utf-8;', 'Cache-Control' => 'public, max-age=86400' }, [body] ]
+    # [status, {'Content-Type'  => 'text/html; charset=utf-8;', 'Cache-Control' => 'public, max-age=86400' }, [body] ]
+    [status, {'Content-Type'  => 'text/html; charset=utf-8;' }, [body] ]
   end
-end
-
-def EMap(&block)
-  EMap.define(&block)
 end

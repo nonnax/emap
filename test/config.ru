@@ -3,7 +3,7 @@
 require_relative 'app'
 
 use Rack::Static,
-  :urls => ["/images", "/js", "/css"],
+  :urls => ["/img", "/js", "/css"],
   :root => "public"
 
 

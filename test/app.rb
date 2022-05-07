@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 # Id$ nonnax 2022-05-07 13:09:18 +0800
 require_relative '../lib/emap'
+require_relative 'lib/model'
 
-database={item: [1, 2, 3], stock: 2}
+database=DB::load
 
 Router.define do
 
@@ -10,7 +11,9 @@ Router.define do
       :index,
       layout: :'views/layout', time: Time.now
 
-  erb '/home', :'views/show', item:1, data: database
+  erb '/show', :'views/show',
+      item:1,
+      layout: :'views/layout'
 
   erb '/404',
       'not found handler',
@@ -18,9 +21,9 @@ Router.define do
 end
 
 App=EMap.get do |body, **params|
-    p [body, params]
-    erb body, **params
+    p [body.size, params]
+    erb body, **params.merge(db: database)
 end
 
 
-pp Router.map
+pp App.routes

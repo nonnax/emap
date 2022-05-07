@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
-  <title><%=data%></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
   </head>
   <body>
-  <%=yield%>
+
+  <div id="header">
+    <div class="navbar">
+      <a href="/"><img class='blur' src="/img/banner.jpg" style="width:100%"></a>
+    </div>
+    <div class="navbar">
+      <a class="item" href='/'>home</a>
+      <a class="item" href='/about'>about</a>
+    </div>
+  </div>
+
+  <div id="container">
+    <%= yield %>
+  </div>
+
   </body>
 </html>
